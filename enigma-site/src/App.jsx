@@ -8,27 +8,22 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //y axis overflows
 //logo also acts as home button
 
-
+//too many state updates, need to figure out how to fix that but keep the animation
+//may not even need to use states, just do it the traditional JS way(but there's no actual html element?)
 class BuildNav extends React.Component {
     constructor(props) {
         super(props)
-        this.state = { shadow: true }//for turning the logo shadow on and off for flicker effect
         this.handleShadow = this.handleShadow.bind(this);
     };
+
     handleShadow = () => {
-        if (this.state.shadow) {//if it's true, switch to the unshadowed version and update state
-            this.setState({ shadow: false })
-            return (
-                <li className='text-4xl mr-10'><a href=""><b><i>Enigma</i></b></a></li>
-            );
-        };
-        this.setState({ shadow: true })
         return (
             <li className='drop-shadow-title text-4xl mr-10'><a href=""><b><i>Enigma</i></b></a></li>
         );
     };
+
     render() {
-        return (
+        return (//needs an interval right where the handleShadow call is, I think, but for some reason that makes these random numbers?????
             <nav className="text-blood text-2xl fixed w-screen">
                 <ul className='bg-zinc-900 flex flex-row justify-start space-x-7 py-4 pl-10 font-mono'>
                     <this.handleShadow />
@@ -42,9 +37,11 @@ class BuildNav extends React.Component {
 
     };
 };
+class MainBody extends React.Component {
 
-//works, but doesn't animate yet
-//to do the animation, just have it swap between two different classes, one with the shadow and one without on a random timer
+
+
+}
 
 function App() {
     return (
