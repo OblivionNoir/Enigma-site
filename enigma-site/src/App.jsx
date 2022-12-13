@@ -19,30 +19,49 @@ class Navbar extends React.Component {
             <li className='drop-shadow-title text-4xl mr-10'><a href=""><b><i>Enigma</i></b></a></li>
         );
     };
+    //starts off hidden
+    createCategoryChildren() {
+        return (
+            <React.Fragment>
+                <div className='acc_child'>Dark Web</div>
+                <div className='acc_child'>Internet Culture</div>
+                <div className='acc_child'>Cybersecurity</div>
+                <div className='acc_child'>Media/Entertainment</div>
+                <div className='acc_child'>Scary</div>
+                <div className='acc_child'>Unsolved</div>
+                <div className='acc_child'>Fictional</div>
+            </React.Fragment>
+        )
+    }
+    removeCategoryChildren() {
+        let acc_children = document.getElementsByClassName
+        for (let i = 0; i < acc_children.length; i++) {
+            acc_children[i].style.display = "none";
+        }
+    }
+    //determines what to do when button is clicked, render or remove
+    controlTagMenu() {
+
+    }
+
     render() {
         return (
             <nav className="text-blood text-2xl static w-screen">
                 <ul className='bg-zinc-900 flex flex-row justify-start space-x-7 py-4 pl-10 font-mono'>
-                    <this.handleShadow />
-                    <li>
-                        <label for="Tags">Tags</label>
-                        <select name="Tags">
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                            <option></option>
-                        </select>
-                    </li>
+                    <li><this.handleShadow /></li>
+                    <li><button id="acc_menu" onClick={this.controlTagMenu}>Browse by category...</button></li>
                     <li><a href="">Videos</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="">Sign up</a></li>
                     <li><a href="">Subscribe</a></li>
                 </ul>
             </nav>
+
         );
     };
 };
+
+
 class MiniNav extends React.Component {
     render() {
         return (//toss in some SVG
@@ -72,6 +91,10 @@ class ScrollFeed extends React.Component {
                             <caption><b>title</b></caption>
                             <p>test2</p>
                         </article>
+                        <article>
+                            <caption><b>title</b></caption>
+                            <p>test3</p>
+                        </article>
                     </div>
                 </section>
             </main>
@@ -80,9 +103,6 @@ class ScrollFeed extends React.Component {
 };
 //do the main rendering here
 class MainSite extends React.Component {
-    constructor(props) {
-        super(props);
-    };
     render() {
         return (
             <React.Fragment>
