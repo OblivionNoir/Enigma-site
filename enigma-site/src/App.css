@@ -11,8 +11,10 @@ main {
 
 article {
   border: .15vh solid rgb(63, 63, 70);
-  border-radius: 0.375rem;
+  border-radius: 1.5rem;
   margin-top: 1vh;
+  font-size: 1.5rem;
+  padding: 1rem 1rem 1rem 1rem;
 
 }
 
@@ -24,7 +26,6 @@ article {
   animation-timing-function: linear;
 }
 
-/*lets make this hover rather than click*/
 .open {
   z-index: 1;
   height: auto;
@@ -41,10 +42,19 @@ article {
   display: none;
 }
 
+
 li:hover:not(#logo) {
   background-color: rgb(38, 38, 41);
-
 }
+
+/*so it fits with the container*/
+#last:hover {
+  background-color: rgb(38, 38, 41);
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+}
+
+
 
 @keyframes flicker {
   0% {
