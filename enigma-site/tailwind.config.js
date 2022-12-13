@@ -8,6 +8,9 @@ module.exports = {
     },
     colors: {
       'blood': 'rgb(138, 3, 3)'
+    },
+    width: {
+      'MainScroll': '95.83%'
     }
   },
   plugins: [],

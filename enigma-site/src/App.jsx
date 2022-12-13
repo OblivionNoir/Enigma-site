@@ -8,47 +8,92 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //y axis overflows
 //logo also acts as home button
 
-//too many state updates, need to figure out how to fix that but keep the animation
-//may not even need to use states, just do it the traditional JS way(but there's no actual html element?)
-class BuildNav extends React.Component {
-    constructor(props) {
-        super(props)
-        this.handleShadow = this.handleShadow.bind(this);
-    };
 
+class Navbar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    //need a way to make the shadow flicker on/off 
     handleShadow = () => {
         return (
             <li className='drop-shadow-title text-4xl mr-10'><a href=""><b><i>Enigma</i></b></a></li>
         );
     };
-
     render() {
-        return (//needs an interval right where the handleShadow call is, I think, but for some reason that makes these random numbers?????
-            <nav className="text-blood text-2xl fixed w-screen">
+        return (
+            <nav className="text-blood text-2xl static w-screen">
                 <ul className='bg-zinc-900 flex flex-row justify-start space-x-7 py-4 pl-10 font-mono'>
                     <this.handleShadow />
-                    <li><a href="">Tags</a></li>
+                    <li>
+                        <label for="Tags">Tags</label>
+                        <select name="Tags">
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                            <option></option>
+                        </select>
+                    </li>
                     <li><a href="">Videos</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="">Sign up</a></li>
+                    <li><a href="">Subscribe</a></li>
                 </ul>
             </nav>
+        );
+    };
+};
+class MiniNav extends React.Component {
+    render() {
+        return (//toss in some SVG
+            <nav className=' text-white static mt-16 flex justify-end max-w-4xl m-auto'>
+                <ul className='flex flex-row space-x-2.5'>
+                    <li><small>Sort by...</small></li>
+                    <li><button>Newest</button></li>
+                    <li><button>Popular</button></li>
+                </ul>
+            </nav>
+        );
+    };
+};
+//this will have articles, each with a background, headline, and short description
+//in column format
+class ScrollFeed extends React.Component {
+    render() {
+        return (
+            <main className='flex flex-column bg-zinc-700 max-w-4xl justify-center m-auto mt-5 overflow-y-auto rounded-xl'>
+                <section className='bg-zinc-600 w-MainScroll mt-5 rounded-xl'>
+                    <div className='space-y-40 mx-5'>
+                        <article>
+                            <caption><b>title</b></caption>
+                            <p>test</p>
+                        </article>
+                        <article>
+                            <caption><b>title</b></caption>
+                            <p>test2</p>
+                        </article>
+                    </div>
+                </section>
+            </main>
+        );
+    };
+};
+//do the main rendering here
+class MainSite extends React.Component {
+    constructor(props) {
+        super(props);
+    };
+    render() {
+        return (
+            <React.Fragment>
+                <Navbar />
+                <MiniNav />
+                <ScrollFeed />
+            </React.Fragment>
         );
 
     };
 };
-class MainBody extends React.Component {
 
-
-
-}
-
-function App() {
-    return (
-        <BuildNav />
-    );
-
-};
-
-root.render(<App />);
-export default App;
+root.render(<MainSite />);
+export default MainSite;
