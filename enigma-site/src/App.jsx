@@ -1,74 +1,61 @@
 import './App.css';
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 
 //home page will include a feed of the most popular/newest stories, titles with short descriptions, centered with invisible border kinda Reddit style
 //sort by most popular (in views) within certain time frames, newest
 //y axis overflows
 //logo also acts as home button
 
-function createCategoryChildren() {
+
+
+function AccMenu() {
+    //make hover controls
+    const [isShown, setIsShown] = useState(false)
     return (
         <React.Fragment>
-            <div className='acc_child'>
-                <a href="">Dark Web</a>
-            </div>
-            <div className='acc_child'>
-                <a href="">Internet Culture</a>
-            </div>
-            <div className='acc_child'>
-                <a href="">Cybersecurity</a>
-            </div>
-            <div className='acc_child'>
-                <a href="">Media/Entertainment</a>
-            </div>
-            <div className='acc_child'>
-                <a href="">Scary</a>
-            </div>
-            <div className='acc_child'>
-                <a href="">Unsolved</a>
-            </div>
-            <div className='acc_child'>
-                <a href="">Fictional</a>
-            </div>
+            <button onMouseEnter={() => setIsShown(true)}
+            >
+                Browse by category...
+
+                <div className={(isShown ? 'open' : 'closed')}>
+                    <ul onMouseLeave={() => setIsShown(false)}>
+                        <li>Dark Web</li>
+                        <li>Internet Culture</li>
+                        <li>Cybersecurity</li>
+                        <li>Media/Entertainment</li>
+                        <li>Scary</li>
+                        <li>Unsolved</li>
+                        <li>Fictional</li>
+                    </ul>
+                </div>
+            </button>
         </React.Fragment>
     );
 };
-function removeCategoryChildren() {
-    let acc_children = document.getElementsByClassName
-    for (let i = 0; i < acc_children.length; i++) {
-        acc_children[i].style.display = "none";
-    };
-};
-function controlTagMenu() {
-
-};
-
+//category btn needs its own vertical container
 function Navbar() {
     return (
-        <nav className="text-blood text-2xl static w-screen">
-            <ul className='bg-zinc-900 flex flex-row justify-start space-x-7 py-4 pl-10 font-mono'>
-                <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target'>
-                    <a href="">
+        <nav className="text-blood text-2xl static w-screen ">
+
+            <ul className='bg-zinc-900 flex flex-row justify-start space-x-7 py-4 pl-10 font-mono max-h-20'>
+                <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target' id="logo">
+                    <a href="index.html">
                         <b><i>Enigma</i></b>
                     </a>
                 </li>
-                <li>
-                    <button id="acc_menu" onClick={controlTagMenu}>
-                        Browse by category...
-                    </button>
-                </li>
+                <AccMenu />
                 <li><a href="">Videos</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="">Sign up</a></li>
                 <li><a href="">Subscribe</a></li>
             </ul>
-        </nav>
 
+        </nav>
     );
 };
-
 
 function MiniNav() {
     return (//toss in some SVG
@@ -83,22 +70,26 @@ function MiniNav() {
 };
 //this will have articles, each with a background, headline, and short description
 //in column format
+//default sort is by most popular that day
 function ScrollFeed() {
     return (
-        <main className='flex flex-column bg-zinc-700 max-w-4xl justify-center m-auto mt-5 overflow-y-auto rounded-xl'>
-            <section className='bg-zinc-600 w-MainScroll mt-5 rounded-xl'>
+        <main className='flex flex-column bg-zinc-700 max-w-4xl justify-center m-auto mt-5 overflow-y-auto rounded-3xl'>
+            <section className='bg-zinc-600 w-MainScroll mt-5 rounded-3xl'>
                 <div className='space-y-40 mx-5'>
                     <article>
-                        <caption><b>title</b></caption>
+                        <h1><b>title</b></h1>
                         <p>test</p>
+                        <small>tags go here</small>
                     </article>
                     <article>
-                        <caption><b>title</b></caption>
+                        <h1><b>title</b></h1>
                         <p>test2</p>
+                        <small>tags go here</small>
                     </article>
                     <article>
-                        <caption><b>title</b></caption>
+                        <h1><b>title</b></h1>
                         <p>test3</p>
+                        <small>tags go here</small>
                     </article>
                 </div>
             </section>

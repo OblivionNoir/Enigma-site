@@ -24,18 +24,44 @@ article {
   animation-timing-function: linear;
 }
 
+/*lets make this hover rather than click*/
+.open {
+  z-index: 1;
+  height: auto;
+  background-color: rgb(24, 24, 27);
+  width: 10vw;
+  display: block;
+  position: absolute;
+  border-bottom-left-radius: 1.25rem;
+  border-bottom-right-radius: 1.25rem;
+  margin-top: 1rem;
+}
+
+.closed {
+  display: none;
+}
+
+li:hover:not(#logo) {
+  background-color: rgb(38, 38, 41);
+
+}
+
 @keyframes flicker {
   0% {
     opacity: 0.3;
   }
 
   10% {
-    opacity: 0.9;
+    opacity: 1;
 
   }
 
+  15% {
+    opacity: 0.3;
+  }
+
   20% {
-    opacity: 0.9;
+    opacity: 0.3;
   }
 
   30% {
