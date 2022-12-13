@@ -23,26 +23,40 @@ class Navbar extends React.Component {
     createCategoryChildren() {
         return (
             <React.Fragment>
-                <div className='acc_child'>Dark Web</div>
-                <div className='acc_child'>Internet Culture</div>
-                <div className='acc_child'>Cybersecurity</div>
-                <div className='acc_child'>Media/Entertainment</div>
-                <div className='acc_child'>Scary</div>
-                <div className='acc_child'>Unsolved</div>
-                <div className='acc_child'>Fictional</div>
+                <div className='acc_child'>
+                    <a href="">Dark Web</a>
+                </div>
+                <div className='acc_child'>
+                    <a href="">Internet Culture</a>
+                </div>
+                <div className='acc_child'>
+                    <a href="">Cybersecurity</a>
+                </div>
+                <div className='acc_child'>
+                    <a href="">Media/Entertainment</a>
+                </div>
+                <div className='acc_child'>
+                    <a href="">Scary</a>
+                </div>
+                <div className='acc_child'>
+                    <a href="">Unsolved</a>
+                </div>
+                <div className='acc_child'>
+                    <a href="">Fictional</a>
+                </div>
             </React.Fragment>
-        )
-    }
+        );
+    };
     removeCategoryChildren() {
         let acc_children = document.getElementsByClassName
         for (let i = 0; i < acc_children.length; i++) {
             acc_children[i].style.display = "none";
-        }
-    }
+        };
+    };
     //determines what to do when button is clicked, render or remove
     controlTagMenu() {
 
-    }
+    };
 
     render() {
         return (
