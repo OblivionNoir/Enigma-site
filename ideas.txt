@@ -1,2 +1,1 @@
 -use an accordion menu for the story categories, gpt can write the stories themselves
--Make a creepy glitchy video player! Have a "videos" section on the top navbar that contains this. 
