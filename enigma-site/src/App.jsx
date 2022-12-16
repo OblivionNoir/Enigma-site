@@ -67,7 +67,7 @@ function Navbar() {
     //accmenu - leave it alone
     return (
         <BrowserRouter>
-            <nav className=" text-2xl static w-screen">
+            <nav className=" text-2xl fixed w-screen z-10">
                 <ul className='bg-zinc-900 text-blood flex flex-row justify-start space-x-7 py-4 pl-10 font-mono max-h-20'>
 
                     <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target' id="logo">
@@ -110,13 +110,17 @@ function Navbar() {
 
 function MiniNav() {
     return (//toss in some SVG
-        <nav className=' text-white static mt-16 flex justify-end max-w-4xl m-auto'>
-            <ul className='flex flex-row space-x-2.5'>
-                <li><small>Sort by...</small></li>
-                <li><button>Newest</button></li>
-                <li><button>Popular</button></li>
-            </ul>
-        </nav>
+        <React.Fragment>
+            <br></br>
+            <br></br>
+            <nav className=' text-white max-w-4xl mt-20 ml-MiniNavM'>
+                <ul className='flex flex-row space-x-2.5'>
+                    <li><small>Sort by...</small></li>
+                    <li><button>Newest</button></li>
+                    <li><button>Popular</button></li>
+                </ul>
+            </nav>
+        </React.Fragment>
     );
 };
 //this will have articles, each with a background, headline, and short description
@@ -127,7 +131,7 @@ function MiniNav() {
 function ScrollFeed() {
     let article_author = "me"
     return (
-        <main className='flex flex-column bg-zinc-700 max-w-4xl justify-center m-auto mt-5 overflow-y-auto rounded-3xl'>
+        <main className='flex flex-column bg-zinc-700 max-w-4xl justify-center m-auto mt-3 overflow-y-auto rounded-3xl relative'>
             <section className='bg-zinc-600 w-MainScroll mt-5 rounded-3xl'>
                 <div className='space-y-16 mx-5'>
                     <article>
