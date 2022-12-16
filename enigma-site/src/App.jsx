@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { AboutTest } from './About'
 import { SubmitTest } from './Submit';
 import { SignUpTest } from './SignUp';
@@ -62,12 +62,11 @@ function AccMenu() {
 
 
 //this needs to stay put as you scroll down!
-//reformat all the hrefs to do links in the React way
 function Navbar() {
     //why is navigation so needlessly complicated...want my href back
     //accmenu - leave it alone
     return (
-        <React.Fragment>
+        <BrowserRouter>
             <nav className=" text-2xl static w-screen">
                 <ul className='bg-zinc-900 text-blood flex flex-row justify-start space-x-7 py-4 pl-10 font-mono max-h-20'>
 
@@ -105,7 +104,7 @@ function Navbar() {
                 <Route path="/SignUp" element={<SignUpTest />}></Route>
                 <Route path="/Premium" element={<PremiumTest />}></Route>
             </Routes>
-        </React.Fragment>
+        </BrowserRouter>
     );
 };
 
