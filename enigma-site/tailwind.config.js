@@ -14,6 +14,9 @@ module.exports = {
     },
     margin: {
       'MiniNavM': '96rem'
+    },
+    padding: {
+      'SignLogPad': '87rem'
     }
   },
   plugins: [],

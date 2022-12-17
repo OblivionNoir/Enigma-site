@@ -6,6 +6,7 @@ import { AboutTest } from './About'
 import { SubmitTest } from './Submit';
 import { SignUpTest } from './SignUp';
 import { PremiumTest } from './Premium';
+import { LoginTest } from './Login';
 
 
 
@@ -28,7 +29,7 @@ function AccMenu() {
     return (
         <React.Fragment>
             <button onMouseEnter={() => setIsShown(true)}>
-                Browse by category...
+                Browse by category
 
                 <div className={(isShown ? 'open' : 'closed')}>
                     <ul onMouseLeave={() => setIsShown(false)}>
@@ -67,10 +68,10 @@ function Navbar() {
     //accmenu - leave it alone
     return (
         <BrowserRouter>
-            <nav className=" text-2xl fixed w-screen z-10">
-                <ul className='bg-zinc-900 text-blood flex flex-row justify-start space-x-7 py-4 pl-10 font-mono max-h-20'>
+            <nav className=" text-2xl fixed w-screen z-10 max-h-10">
+                <ul className='bg-zinc-900 text-blood flex flex-row justify-start space-x-10 py-4 pl-10 font-mono '>
 
-                    <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target' id="logo">
+                    <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target ' id="logo">
                         <b><i>
                             <Link to="/">
                                 Enigma
@@ -89,25 +90,42 @@ function Navbar() {
                     </li>
 
                     <li>
-                        <Link to="/SignUp">Sign up</Link>
-                    </li>
-
-                    <li>
                         <Link to="/Premium">Go Premium</Link>
                     </li>
+                    <SignLog />
 
                 </ul>
             </nav>
             <Routes>
                 <Route path="/About" element={<AboutTest />}></Route>
                 <Route path="/Submit" element={<SubmitTest />}></Route>
-                <Route path="/SignUp" element={<SignUpTest />}></Route>
                 <Route path="/Premium" element={<PremiumTest />}></Route>
             </Routes>
         </BrowserRouter>
     );
 };
-
+/*seperate nav for these 2, they have complex functions and it doesn't 
+seem possible to align them to the right in the same list while maintaining responsiveness.*/
+function SignLog() {
+    return (
+        <React.Fragment>
+            <nav className="text-2xl z-10 max-h-10 pl-SignLogPad">
+                <ul className='flex flex-row space-x-7'>
+                    <li>
+                        <Link to="/SignUp">Sign up</Link>
+                    </li>
+                    <li>
+                        <Link to="/Login">Log In</Link>
+                    </li>
+                </ul>
+            </nav>
+            <Routes>
+                <Route path="/Login" element={<LoginTest />}></Route>
+                <Route path="/SignUp" element={<SignUpTest />}></Route>
+            </Routes>
+        </React.Fragment>
+    );
+};
 function MiniNav() {
     return (//toss in some SVG
         <React.Fragment>
