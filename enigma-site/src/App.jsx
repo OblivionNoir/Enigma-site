@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState } from "react";
-import ReactDOM from "react-dom/client";
+//import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { AboutTest } from './About'
 import { SubmitTest } from './Submit';
@@ -9,9 +9,6 @@ import { PremiumTest } from './Premium';
 import { LoginTest } from './Login';
 
 
-
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
 
 //home page will include a feed of the most popular/newest stories, titles with short descriptions, centered with invisible border kinda Reddit style
 //sort by most popular (in views) within certain time frames, newest
@@ -198,5 +195,5 @@ class MainSite extends React.Component {
     };
 };
 
-root.render(<MainSite />);
+//root.render(<MainSite />);
 export default MainSite;
