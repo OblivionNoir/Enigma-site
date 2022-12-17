@@ -7,7 +7,7 @@ module.exports = {
         'title': '.5rem .5rem .5rem rgb(138, 3, 3)'
     },
     colors: {
-      'blood': 'rgb(138, 3, 3)'
+      'blood': 'rgb(190, 3, 3)'
     },
     width: {
       'MainScroll': '95.83%'
