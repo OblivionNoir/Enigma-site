@@ -42,9 +42,15 @@ article {
   display: none;
 }
 
+li:not(#logo) {
+  border-radius: .2rem;
+  padding: 0 .2rem 0 .2rem;
+
+}
 
 li:hover:not(#logo) {
   background-color: rgb(38, 38, 41);
+
 }
 
 /*so it fits with the container*/
