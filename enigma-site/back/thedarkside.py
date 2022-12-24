@@ -1,15 +1,11 @@
+#this is our factory app
 from flask import Flask
 
 app = Flask(__name__)
 
-# Members API route
+
+def createApp(test_config=None):
+    #create the Flask instance
+    app = Flask(__name__, instance_relative_config=True)
 
 
-@app.route("/members")
-def members():
-    return {"members": ["Member1", "Member2", "Member3"]}
-
-
-# debug true cause we're in development mode
-if __name__ == "__main__":
-    app.run(debug=True)

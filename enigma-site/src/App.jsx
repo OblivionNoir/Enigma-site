@@ -3,7 +3,6 @@ import React, { useState } from "react";
 //import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { AboutTest } from './About'
-import { SubmitTest } from './Submit';
 import { SignUpTest } from './SignUp';
 import { PremiumTest } from './Premium';
 import { LoginTest } from './Login';
@@ -23,6 +22,7 @@ var tags = ["Dark Web",
 function AccMenu() {
     //make hover controls
     const [isShown, setIsShown] = useState(false)
+    //the tags don't need their own pages, it will just update the main feed
     return (
         <React.Fragment>
             <button onMouseEnter={() => setIsShown(true)}>
@@ -30,27 +30,13 @@ function AccMenu() {
 
                 <div className={(isShown ? 'open' : 'closed')}>
                     <ul onMouseLeave={() => setIsShown(false)}>
-                        <li>
-                            <a href="">Dark Web</a>
-                        </li>
-                        <li>
-                            <a href="">Internet Culture</a>
-                        </li>
-                        <li>
-                            <a href="">Cybersecurity</a>
-                        </li>
-                        <li>
-                            <a href="">Media/Entertainment</a>
-                        </li>
-                        <li>
-                            <a href="">Scary</a>
-                        </li>
-                        <li>
-                            <a href="">Conspiracies</a>
-                        </li>
-                        <li id="last">Fictional<a href="">
-                        </a>
-                        </li>
+                        <li>Dark Web</li>
+                        <li>Internet Culture</li>
+                        <li>Cybersecurity</li>
+                        <li>Media/Entertainment</li>
+                        <li>Scary</li>
+                        <li>Conspiracies</li>
+                        <li id="last">Fictional</li>
                     </ul>
                 </div>
             </button>
@@ -70,7 +56,7 @@ function Navbar() {
 
                     <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target ' id="logo">
                         <b><i>
-                            <Link to="/">
+                            <Link to="/App">
                                 Enigma
                             </Link>
                         </i></b>
@@ -83,7 +69,7 @@ function Navbar() {
                     <li><AccMenu /></li>
 
                     <li>
-                        <Link to="/Submit">Submit</Link>
+                        <Submit />
                     </li>
 
                     <li>
@@ -94,8 +80,8 @@ function Navbar() {
                 </ul>
             </nav>
             <Routes>
+                <Route path="/App"></Route>
                 <Route path="/About" element={<AboutTest />}></Route>
-                <Route path="/Submit" element={<SubmitTest />}></Route>
                 <Route path="/Premium" element={<PremiumTest />}></Route>
             </Routes>
         </BrowserRouter>
@@ -103,6 +89,24 @@ function Navbar() {
 };
 /*seperate nav for these 2, they have complex functions and it doesn't 
 seem possible to align them to the right in the same list while maintaining responsiveness.*/
+
+function Submit() {
+    //for purposes now let's pretend they do have an account
+    //this can work similarly to the hover drop down
+    //inside this, allow user to pull from the list of tags when posting
+    const has_account = true;
+    const [isVisible, setisVisible] = useState(false);
+    if (has_account) {
+        <form className={(isVisible ? 'formOpen' : 'formClose')}>
+
+
+
+        </form>
+
+
+    };
+};
+
 function SignLog() {
     return (
         <React.Fragment>
@@ -143,11 +147,30 @@ function MiniNav() {
 //default sort is by most popular that day
 
 //todo: don't hardcode the tags, have it pull from the list when people input so you can't just make random shit up
+function handleFormSubmission(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    fetch('/src/back/form/submit-form', {
+        method: 'POST',
+        body: formData
+    })
+        .then((response) => response.text())
+        .then((data) => {
+            console.log(data);
+        });
+};
+function handleFormData() {
+    fetch('./src/back/form/get-data')
+        .then((response) => response.json())
+        .then((data) => {
+            //display the data
+        });
+};
 function ScrollFeed() {
     let article_author = "me"
     return (
-        <main className='flex flex-column bg-zinc-600 max-w-4xl justify-center m-auto mt-3 overflow-y-auto rounded-3xl relative'>
-            <section className='bg-zinc-500 w-MainScroll mt-5 rounded-3xl'>
+        <main className='flex flex-column bg-zinc-500 max-w-4xl justify-center m-auto mt-3 overflow-y-auto rounded-3xl relative font-mono'>
+            <section className=' w-MainScroll mt-5 rounded-3xl'>
                 <div className='space-y-16 mx-5'>
                     <article>
                         <h1><b>Are they Training an AI Model on You?</b></h1>
