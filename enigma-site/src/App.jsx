@@ -44,17 +44,29 @@ function AccMenu() {
     );
 };
 
+function SignLog() {
+    return (
+        <ul className='flex flex-row space-x-10 w-3/4 justify-end pr-10'>
+            <li>
+                <Link to="/SignUp">Sign up</Link>
+            </li>
+            <li>
+                <Link to="/Login">Log In</Link>
+            </li>
+        </ul>
+    );
+};
 
-//this needs to stay put as you scroll down!
 function Navbar() {
     //why is navigation so needlessly complicated...want my href back
-    //accmenu - leave it alone
     return (
         <BrowserRouter>
-            <nav className="text-2xl fixed w-screen z-10 topnav">
-                <ul className=' text-blue-700 flex flex-row justify-start space-x-10 py-4 pl-10 font-mono whitespace-nowrap topul'>
+            <nav className="text-2xl fixed w-full z-10 topnav whitespace-nowrap">
+                <ul className=' text-blue-700  flex flex-row justify-start 
+                space-x-10 py-4 pl-10 font-mono topul'>
 
-                    <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target ' id="logo">
+                    <li className='drop-shadow-title text-4xl mr-10 
+                    flicker-ani-target' id="logo">
                         <b><i>
                             <Link to="/App">
                                 Enigma
@@ -71,14 +83,21 @@ function Navbar() {
                     <li>
                         <Link to="/Premium">Go Premium</Link>
                     </li>
+
+                    <li>
+                        <Submit />
+                    </li>
                     <SignLog />
 
                 </ul>
             </nav>
+
             <Routes>
                 <Route path="/App"></Route>
                 <Route path="/About" element={<AboutTest />}></Route>
                 <Route path="/Premium" element={<PremiumTest />}></Route>
+                <Route path="/Login" element={<LoginTest />}></Route>
+                <Route path="/SignUp" element={<SignUpTest />}></Route>
             </Routes>
         </BrowserRouter>
     );
@@ -103,29 +122,6 @@ function Submit() {
     };
 };
 
-function SignLog() {
-    return (
-        <React.Fragment>
-            <nav className="text-2xl z-10 max-h-10 pl-SignLogPad">
-                <ul className='flex flex-row space-x-7'>
-                    <li>
-                        <Submit />
-                    </li>
-                    <li>
-                        <Link to="/SignUp">Sign up</Link>
-                    </li>
-                    <li>
-                        <Link to="/Login">Log In</Link>
-                    </li>
-                </ul>
-            </nav>
-            <Routes>
-                <Route path="/Login" element={<LoginTest />}></Route>
-                <Route path="/SignUp" element={<SignUpTest />}></Route>
-            </Routes>
-        </React.Fragment>
-    );
-};
 
 //this will have articles, each with a background, headline, and short description
 //in column format
@@ -144,6 +140,7 @@ function HandleFormSubmission(event) {
             console.log(data);
         });
 };
+
 function HandleFormData() {
     fetch('./src/back/form/get-data')
         .then((response) => response.json())
@@ -156,7 +153,8 @@ function ScrollFeed() {
     let article_author = "me"
     return (
         <React.Fragment>
-            <div id="mini-nav-cont" className='max-w-4xl m-auto flex justify-end'>
+            <div id="mini-nav-cont" className='max-w-4xl m-auto flex 
+            justify-end'>
                 <nav className=' text-white mt-32 whitespace-nowrap mr-4'>
                     <ul className='flex flex-row space-x-2.5'>
                         <li><small>Sort by...</small></li>
@@ -166,7 +164,8 @@ function ScrollFeed() {
                 </nav>
             </div>
 
-            <main className=' flex flex-column bg-zinc-500 max-w-4xl justify-center m-auto mt-3 overflow-y-auto rounded-3xl  font-mono'>
+            <main className=' flex flex-column bg-zinc-500 max-w-4xl 
+            justify-center m-auto mt-3 overflow-y-auto rounded-3xl font-mono'>
                 <section className=' w-MainScroll mt-5 rounded-3xl'>
                     <div className='space-y-16 mx-5'>
                         <article>

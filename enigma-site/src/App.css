@@ -34,14 +34,16 @@ article {
 /*this will move over to the left at a certain screen size*/
 .open {
   z-index: 1;
-  height: auto;
+  max-height: auto;
   background-color: rgb(24, 24, 27);
-  max-width: 15vw;
+  width: 12em;
   display: block;
   position: absolute;
   border-bottom-left-radius: 1.25rem;
   border-bottom-right-radius: 1.25rem;
   margin-top: 1rem;
+  font-size: .9vmax;
+  justify-content: space-between;
 }
 
 .closed {

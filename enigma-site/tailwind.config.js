@@ -11,7 +11,11 @@ module.exports = {
     },
     padding: {
       'SignLogPad': '87rem'
-    }
+    }, 
+    fontSize: {
+      'normaltext': '.95vmax',
+      'logosize': '1.9vmax'
+    },
   },
   plugins: [],
 }
