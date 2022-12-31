@@ -4,10 +4,7 @@ module.exports = {
   theme: {
     extend: {
       dropShadow: {
-        'title': '.5rem .5rem .5rem rgb(138, 3, 3)'
-    },
-    colors: {
-      'blood': 'rgb(190, 3, 3)'
+        'title': '.25rem .25rem .25rem rgb(30,64,175)'
     },
     width: {
       'MainScroll': '95.83%'

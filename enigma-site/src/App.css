@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'chivo mono';
+  src: url('https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap');
+}
+
 body {
   background-color: rgba(0, 0, 0, 0.95);
 }
@@ -26,11 +31,12 @@ article {
   animation-timing-function: linear;
 }
 
+/*this will move over to the left at a certain screen size*/
 .open {
   z-index: 1;
   height: auto;
   background-color: rgb(24, 24, 27);
-  width: 10vw;
+  max-width: 15vw;
   display: block;
   position: absolute;
   border-bottom-left-radius: 1.25rem;
@@ -104,4 +110,24 @@ li:hover:not(#logo) {
     opacity: 1;
   }
 
+}
+
+/*zinc 900 to blue 700*/
+body,
+.topul {
+  background: linear-gradient(45deg, rgb(24, 24, 27) 0%,
+      rgb(28, 40, 60) 70%,
+      rgb(29, 78, 216) 100%);
+  /*background: linear-gradient(90deg rgb(24, 24, 27) 50%, rgb(30, 58, 138) 100%);*/
+
+}
+
+.topnav {
+  border-bottom: .25rem;
+  border-style: solid;
+  border-image: linear-gradient(to right, rgb(29, 78, 216), rgb(28, 40, 60)) 1;
+}
+
+.topul {
+  background: linear-gradient(90deg, rgb(24, 24, 27) 0%, rgb(24, 24, 27, 0.9) 100%);
 }

@@ -51,8 +51,8 @@ function Navbar() {
     //accmenu - leave it alone
     return (
         <BrowserRouter>
-            <nav className=" text-2xl fixed w-screen z-10 max-h-10">
-                <ul className='bg-zinc-900 text-blood flex flex-row justify-start space-x-10 py-4 pl-10 font-mono '>
+            <nav className=" text-2xl fixed w-screen z-10 topnav">
+                <ul className=' text-blue-700 flex flex-row justify-start space-x-10 py-4 pl-10 font-mono topul'>
 
                     <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target ' id="logo">
                         <b><i>
@@ -67,10 +67,6 @@ function Navbar() {
                     </li>
 
                     <li><AccMenu /></li>
-
-                    <li>
-                        <Submit />
-                    </li>
 
                     <li>
                         <Link to="/Premium">Go Premium</Link>
@@ -113,6 +109,9 @@ function SignLog() {
             <nav className="text-2xl z-10 max-h-10 pl-SignLogPad">
                 <ul className='flex flex-row space-x-7'>
                     <li>
+                        <Submit />
+                    </li>
+                    <li>
                         <Link to="/SignUp">Sign up</Link>
                     </li>
                     <li>
@@ -128,7 +127,7 @@ function SignLog() {
     );
 };
 function MiniNav() {
-    return (//toss in some SVG
+    return (
         <React.Fragment>
             <br></br>
             <br></br>
@@ -147,7 +146,7 @@ function MiniNav() {
 //default sort is by most popular that day
 
 //todo: don't hardcode the tags, have it pull from the list when people input so you can't just make random shit up
-function handleFormSubmission(event) {
+function HandleFormSubmission(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     fetch('/src/back/form/submit-form', {
@@ -159,7 +158,7 @@ function handleFormSubmission(event) {
             console.log(data);
         });
 };
-function handleFormData() {
+function HandleFormData() {
     fetch('./src/back/form/get-data')
         .then((response) => response.json())
         .then((data) => {
@@ -169,7 +168,7 @@ function handleFormData() {
 function ScrollFeed() {
     let article_author = "me"
     return (
-        <main className='flex flex-column bg-zinc-500 max-w-4xl justify-center m-auto mt-3 overflow-y-auto rounded-3xl relative font-mono'>
+        <main className=' flex flex-column bg-zinc-500 max-w-4xl justify-center m-auto mt-3 overflow-y-auto rounded-3xl relative font-mono'>
             <section className=' w-MainScroll mt-5 rounded-3xl'>
                 <div className='space-y-16 mx-5'>
                     <article>
@@ -179,24 +178,6 @@ function ScrollFeed() {
                             Some individuals claim they are being used as data sources and notice strange things happening in their lives. </p>
                         <br></br>
                         <small>tags: conspiracy, cybersecurity</small>
-                        <br></br>
-                        <small><cite>Submitted by <b>{article_author}</b></cite></small>
-                    </article>
-                    <article>
-                        <h1><b>Red Rooms: New Evidence Found?</b></h1>
-                        <br></br>
-                        <p>A group of individuals on Reddit claim to have discovered what could be proof of the existence of
-                            the infamous "red rooms", a place hidden in the dark web where murders are broadcasted live.
-                        </p>
-                        <br></br>
-                        <small>tags: scary, internet culture, dark web</small>
-                        <br></br>
-                        <small><cite>Submitted by <b>{article_author}</b></cite></small>
-                    </article>
-                    <article>
-                        <h1><b>title</b></h1>
-                        <p>test3</p>
-                        <small>tags go here</small>
                         <br></br>
                         <small><cite>Submitted by <b>{article_author}</b></cite></small>
                     </article>
