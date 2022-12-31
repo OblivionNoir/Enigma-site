@@ -9,9 +9,6 @@ module.exports = {
     width: {
       'MainScroll': '95.83%'
     },
-    margin: {
-      'MiniNavM': '96rem'
-    },
     padding: {
       'SignLogPad': '87rem'
     }

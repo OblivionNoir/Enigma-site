@@ -51,8 +51,8 @@ function Navbar() {
     //accmenu - leave it alone
     return (
         <BrowserRouter>
-            <nav className=" text-2xl fixed w-screen z-10 topnav">
-                <ul className=' text-blue-700 flex flex-row justify-start space-x-10 py-4 pl-10 font-mono topul'>
+            <nav className="text-2xl fixed w-screen z-10 topnav">
+                <ul className=' text-blue-700 flex flex-row justify-start space-x-10 py-4 pl-10 font-mono whitespace-nowrap topul'>
 
                     <li className='drop-shadow-title text-4xl mr-10 flicker-ani-target ' id="logo">
                         <b><i>
@@ -126,21 +126,7 @@ function SignLog() {
         </React.Fragment>
     );
 };
-function MiniNav() {
-    return (
-        <React.Fragment>
-            <br></br>
-            <br></br>
-            <nav className=' text-white max-w-4xl mt-20 ml-MiniNavM'>
-                <ul className='flex flex-row space-x-2.5'>
-                    <li><small>Sort by...</small></li>
-                    <li><button>Newest</button></li>
-                    <li><button>Popular</button></li>
-                </ul>
-            </nav>
-        </React.Fragment>
-    );
-};
+
 //this will have articles, each with a background, headline, and short description
 //in column format
 //default sort is by most popular that day
@@ -165,25 +151,39 @@ function HandleFormData() {
             //display the data
         });
 };
+//now do the same thing to fix the main nav's responsiveness
 function ScrollFeed() {
     let article_author = "me"
     return (
-        <main className=' flex flex-column bg-zinc-500 max-w-4xl justify-center m-auto mt-3 overflow-y-auto rounded-3xl relative font-mono'>
-            <section className=' w-MainScroll mt-5 rounded-3xl'>
-                <div className='space-y-16 mx-5'>
-                    <article>
-                        <h1><b>Are they Training an AI Model on You?</b></h1>
-                        <br></br>
-                        <p>Is it true that scientists are secretly training an AI model on people without their consent?
-                            Some individuals claim they are being used as data sources and notice strange things happening in their lives. </p>
-                        <br></br>
-                        <small>tags: conspiracy, cybersecurity</small>
-                        <br></br>
-                        <small><cite>Submitted by <b>{article_author}</b></cite></small>
-                    </article>
-                </div>
-            </section>
-        </main>
+        <React.Fragment>
+            <div id="mini-nav-cont" className='max-w-4xl m-auto flex justify-end'>
+                <nav className=' text-white mt-32 whitespace-nowrap mr-4'>
+                    <ul className='flex flex-row space-x-2.5'>
+                        <li><small>Sort by...</small></li>
+                        <li><button>Newest</button></li>
+                        <li><button>Popular</button></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <main className=' flex flex-column bg-zinc-500 max-w-4xl justify-center m-auto mt-3 overflow-y-auto rounded-3xl  font-mono'>
+                <section className=' w-MainScroll mt-5 rounded-3xl'>
+                    <div className='space-y-16 mx-5'>
+                        <article>
+                            <h1><b>Are they Training an AI Model on You?</b></h1>
+                            <br></br>
+                            <p>Is it true that scientists are secretly training an AI model on people without their consent?
+                                Some individuals claim they are being used as data sources and notice strange things happening in their lives. </p>
+                            <br></br>
+                            <small>tags: conspiracy, cybersecurity</small>
+                            <br></br>
+                            <small><cite>Submitted by <b>{article_author}</b></cite></small>
+                        </article>
+                    </div>
+                </section>
+            </main>
+
+        </React.Fragment>
     );
 };
 //do the main rendering here
@@ -192,7 +192,7 @@ class MainSite extends React.Component {
         return (
             <React.Fragment>
                 <Navbar />
-                <MiniNav />
+
                 <ScrollFeed />
             </React.Fragment>
         );
