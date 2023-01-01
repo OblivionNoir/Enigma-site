@@ -13,12 +13,7 @@ import { LoginTest } from './Login';
 //sort by most popular (in views) within certain time frames, newest
 //y axis overflows
 //logo also acts as home button
-var tags = ["Dark Web",
-    "Internet Culture",
-    "Cybersecurity",
-    "Media/Entertainment",
-    "Scary", "Conspiracies",
-    "Fictional"]
+
 function AccMenu() {
     //make hover controls
     const [isShown, setIsShown] = useState(false)
@@ -84,9 +79,6 @@ function Navbar() {
                         <Link to="/Premium">Go Premium</Link>
                     </li>
 
-                    <li>
-                        <Submit />
-                    </li>
                     <SignLog />
 
                 </ul>
@@ -102,23 +94,101 @@ function Navbar() {
         </BrowserRouter>
     );
 };
-/*seperate nav for these 2, they have complex functions and it doesn't 
-seem possible to align them to the right in the same list while maintaining responsiveness.*/
+/*var tags = ["Dark Web",
+    "Internet Culture",
+    "Cybersecurity",
+    "Media/Entertainment",
+    "Scary", "Conspiracies",
+    "Fictional"
+];*/
+//show a checkmark when the tag is clicked
+function Tag({ name, isSelected }) {
+    return (
+        <li className='text-lg'>{name}</li>
+    );
+};
+//button will need to flip true/false depending on the current state value
 
+
+//think the button needs to be within this func
+//something similar to the thing above, where the class changes if it's shown
+//&& operator renders the list if isVisible is true
+
+function RenderList() {
+    const [isVisible, setVisible] = useState(false);
+    const handleSubmit = (event) => {
+        //need to prevent default to avoid brower refresh 
+        //browser is an idiot
+        event.preventDefault()
+        setVisible(!isVisible)
+    }
+    //flip to opposite (state) if it's been clicked
+    //then flip the class
+    return (
+        <div>
+            <button onClick={handleSubmit}>
+                Tags
+            </button>
+
+            {isVisible && (
+                <ul>
+                    <Tag
+                        isSelected={true}
+                        name='Dark Web'
+                    />
+                    <Tag
+                        isSelected={true}
+                        name='Internet Culture'
+                    />
+                    <Tag
+                        isSelected={true}
+                        name='Cybersecurity'
+                    />
+                    <Tag
+                        isSelected={true}
+                        name='Media/Entertainment'
+                    />
+                    <Tag
+                        isSelected={true}
+                        name='Scary'
+                    />
+                    <Tag
+                        isSelected={true}
+                        name='Conspiracies'
+                    />
+                    <Tag
+                        isSelected={true}
+                        name='Fictional'
+                    />
+                </ul>
+            )}
+        </div>
+    );
+};
+
+
+/*twitter style submit form*/
 function Submit() {
     //for purposes now let's pretend they do have an account
-    //this can work similarly to the hover drop down
     //inside this, allow user to pull from the list of tags when posting
     const has_account = true;
-    const [isVisible, setisVisible] = useState(false);
+    let post_author = "me"
     if (has_account) {
-        <form className={(isVisible ? 'formOpen' : 'formClose')}>
+        return (
+            <form>
+                <button className='exitForm'>
+                    <small>&#10006;</small>
+                </button>
+                <h1 className='text-2xl'>Title here</h1>
 
+                <p className='text-xl'>Text here</p>
 
-
-        </form>
-
-
+                <small className='block'>
+                    <cite>Submitted by <b>{post_author}</b></cite>
+                </small>
+                <RenderList />
+            </form>
+        );
     };
 };
 
@@ -127,7 +197,6 @@ function Submit() {
 //in column format
 //default sort is by most popular that day
 
-//todo: don't hardcode the tags, have it pull from the list when people input so you can't just make random shit up
 function HandleFormSubmission(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -148,7 +217,7 @@ function HandleFormData() {
             //display the data
         });
 };
-//now do the same thing to fix the main nav's responsiveness
+
 function ScrollFeed() {
     let article_author = "me"
     return (
@@ -168,20 +237,10 @@ function ScrollFeed() {
             justify-center m-auto mt-3 overflow-y-auto rounded-3xl font-mono'>
                 <section className=' w-MainScroll mt-5 rounded-3xl'>
                     <div className='space-y-16 mx-5'>
-                        <article>
-                            <h1><b>Are they Training an AI Model on You?</b></h1>
-                            <br></br>
-                            <p>Is it true that scientists are secretly training an AI model on people without their consent?
-                                Some individuals claim they are being used as data sources and notice strange things happening in their lives. </p>
-                            <br></br>
-                            <small>tags: conspiracy, cybersecurity</small>
-                            <br></br>
-                            <small><cite>Submitted by <b>{article_author}</b></cite></small>
-                        </article>
+                        <Submit />
                     </div>
                 </section>
             </main>
-
         </React.Fragment>
     );
 };
@@ -191,7 +250,6 @@ class MainSite extends React.Component {
         return (
             <React.Fragment>
                 <Navbar />
-
                 <ScrollFeed />
             </React.Fragment>
         );

@@ -14,7 +14,7 @@ main {
 
 }
 
-article {
+form {
   border: .15vh solid rgb(63, 63, 70);
   border-radius: 1.5rem;
   margin-top: 1vh;
@@ -49,6 +49,9 @@ article {
 .closed {
   display: none;
 }
+
+
+
 
 li:not(#logo) {
   border-radius: .2rem;
