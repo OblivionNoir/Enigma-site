@@ -107,13 +107,43 @@ function Tag({ name, isSelected }) {
         <li className='text-lg'>{name}</li>
     );
 };
-//button will need to flip true/false depending on the current state value
-
-
-//think the button needs to be within this func
-//something similar to the thing above, where the class changes if it's shown
+//button flips true/false depending on the current state value
 //&& operator renders the list if isVisible is true
+function TagsList() {
+    return (
+        <ul>
+            <Tag
+                isSelected={true}
+                name='Dark Web'
+            />
+            <Tag
+                isSelected={true}
+                name='Internet Culture'
+            />
+            <Tag
+                isSelected={true}
+                name='Cybersecurity'
+            />
+            <Tag
+                isSelected={true}
+                name='Media/Entertainment'
+            />
+            <Tag
+                isSelected={true}
+                name='Scary'
+            />
+            <Tag
+                isSelected={true}
+                name='Conspiracies'
+            />
+            <Tag
+                isSelected={true}
+                name='Fictional'
+            />
+        </ul>
 
+    )
+}
 function RenderList() {
     const [isVisible, setVisible] = useState(false);
     const handleSubmit = (event) => {
@@ -131,36 +161,7 @@ function RenderList() {
             </button>
 
             {isVisible && (
-                <ul>
-                    <Tag
-                        isSelected={true}
-                        name='Dark Web'
-                    />
-                    <Tag
-                        isSelected={true}
-                        name='Internet Culture'
-                    />
-                    <Tag
-                        isSelected={true}
-                        name='Cybersecurity'
-                    />
-                    <Tag
-                        isSelected={true}
-                        name='Media/Entertainment'
-                    />
-                    <Tag
-                        isSelected={true}
-                        name='Scary'
-                    />
-                    <Tag
-                        isSelected={true}
-                        name='Conspiracies'
-                    />
-                    <Tag
-                        isSelected={true}
-                        name='Fictional'
-                    />
-                </ul>
+                <TagsList />
             )}
         </div>
     );
