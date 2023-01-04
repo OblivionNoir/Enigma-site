@@ -75,9 +75,10 @@ function Navbar() {
 
                     <li><AccMenu /></li>
 
-                    <li>
+                    {/*<li>
                         <Link to="/Premium">Go Premium</Link>
-                    </li>
+                    </li>*/}
+                    <li><ValidateLogin /></li>
 
                     <SignLog />
 
@@ -87,7 +88,7 @@ function Navbar() {
             <Routes>
                 <Route path="/App"></Route>
                 <Route path="/About" element={<AboutTest />}></Route>
-                <Route path="/Premium" element={<PremiumTest />}></Route>
+                {/*<Route path="/Premium" element={<PremiumTest />}></Route>*/}
                 <Route path="/Login" element={<LoginTest />}></Route>
                 <Route path="/SignUp" element={<SignUpTest />}></Route>
             </Routes>
@@ -141,9 +142,74 @@ function TagsList() {
                 name='Fictional'
             />
         </ul>
+    );
+};
+//do this the same as the tags list rendering, 
+//but use the X button to flip the sign back
+function ValidateLogin() {
+    //for purposes now let's pretend they are signed in
+    const isSignedIn = true;
 
-    )
-}
+    if (isSignedIn) {
+        return <Submit />
+
+    } else {
+        return window.alert("Please log in or create an account to use this feature")
+    };
+};
+/*twitter style submit form*/
+//First, validate that that they are logged in
+//when this is pulled up, remove the feed
+function PostDate() {
+    const filter_date = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+    };
+    return (
+        //this will need to be updated with back end retrieving the time zone
+        new Date().toLocaleDateString('en-US', filter_date)
+    );
+};
+//use a button to pull it up, then the x exits it
+//Made it here, don't touch the validation
+function Submit() {
+    //inside this, allow user to pull from the list of tags when posting
+    const [SubVisible, setSubVisible] = useState(false);
+    const handlePostSubmission = (event) => {
+        event.preventDefault()
+        setSubVisible(!SubVisible)
+    };
+    return (
+        <React.Fragment>
+            <button onClick={handlePostSubmission}>
+                Submit
+            </button>
+
+            {SubVisible && (
+                <form>
+                    <button className='exitForm'>
+                        <small onClick={handlePostSubmission}>&#10006;</small>
+                    </button>
+                    <h1 className='text-2xl'>Title here</h1>
+
+                    <p className='text-xl'>Text here</p>
+
+                    <small className='block'>
+                        <cite>Submitted by <b>Post author on {<PostDate />}</b></cite>
+                    </small>
+                    <RenderList />
+                </form>
+            )}
+        </React.Fragment>
+    );
+};
+
+
+
+
 function RenderList() {
     const [isVisible, setVisible] = useState(false);
     const handleSubmit = (event) => {
@@ -151,9 +217,8 @@ function RenderList() {
         //browser is an idiot
         event.preventDefault()
         setVisible(!isVisible)
-    }
+    };
     //flip to opposite (state) if it's been clicked
-    //then flip the class
     return (
         <div>
             <button onClick={handleSubmit}>
@@ -166,34 +231,6 @@ function RenderList() {
         </div>
     );
 };
-
-
-/*twitter style submit form*/
-function Submit() {
-    //for purposes now let's pretend they do have an account
-    //inside this, allow user to pull from the list of tags when posting
-    const has_account = true;
-    let post_author = "me"
-    if (has_account) {
-        return (
-            <form>
-                <button className='exitForm'>
-                    <small>&#10006;</small>
-                </button>
-                <h1 className='text-2xl'>Title here</h1>
-
-                <p className='text-xl'>Text here</p>
-
-                <small className='block'>
-                    <cite>Submitted by <b>{post_author}</b></cite>
-                </small>
-                <RenderList />
-            </form>
-        );
-    };
-};
-
-
 //this will have articles, each with a background, headline, and short description
 //in column format
 //default sort is by most popular that day
@@ -238,7 +275,7 @@ function ScrollFeed() {
             justify-center m-auto mt-3 overflow-y-auto rounded-3xl font-mono'>
                 <section className=' w-MainScroll mt-5 rounded-3xl'>
                     <div className='space-y-16 mx-5'>
-                        <Submit />
+
                     </div>
                 </section>
             </main>
