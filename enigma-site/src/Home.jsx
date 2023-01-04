@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 //import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { AboutTest } from './About'
@@ -211,6 +211,32 @@ function DatePost() {
         <cite>Submitted by <b>Post author on {<PostDate />}</b></cite>
     </small>
 };
+function TextareaExpander({ rows, cols, placeholder }) {
+    const textareaRef = useRef(null);
+
+    useEffect(() => {
+        const textarea = textareaRef.current;
+        textarea.style.height = "auto";
+        textarea.style.height = textarea.scrollHeight + "px";
+    }, []);
+
+    return (
+        <textarea
+            ref={textareaRef}
+            style={{ height: "auto", overflow: "hidden" }}
+
+            rows={rows}
+            cols={cols}
+            placeholder={placeholder}
+            onInput={() => {
+                const textarea = textareaRef.current;
+                textarea.style.height = "auto";
+                textarea.style.height = textarea.scrollHeight + "px";
+            }}
+        >
+        </textarea>
+    );
+}
 //todo: fix inside text not scaling
 /*twitter style submit form*/
 //First, validate that that they are logged in
@@ -234,19 +260,30 @@ function Submit() {
             </button>
 
             {SubVisible && (
-                <form className='text-black absolute z-10 mt-mtemp px-10 left-mtemp right-mtemp bg-zinc-500'>
+                <form className='text-black absolute z-10 mt-mtemp px-10 left-mtemp right-mtemp bg-zinc-500 '>
                     <button >
                         <small onClick={handlePostSubmission}>&#10006;</small>
                     </button>
-                    <h1 className='text-2xl'><textarea>Title here</textarea></h1>
+                    <button className='ml-postbm'>Post</button>
 
-                    <textarea className='text-xl h-32'>Text here</textarea>
+                    <h1 className='text-xl'>
+                        <TextareaExpander
+                            rows="1" cols="60"
+                            placeholder="What is this post about?" />
+                    </h1>
+
+                    <p className='text-lg mt-4'>
+                        <TextareaExpander
+                            rows="6" cols="70"
+                            placeholder="Text" />
+                    </p>
                     <RenderList />
                 </form>
             )}
         </React.Fragment>
     );
 };
+
 
 function RenderList() {
     const [isVisible, setVisible] = useState(false);
