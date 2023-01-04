@@ -106,7 +106,7 @@ function Navbar() {
     "Scary", "Conspiracies",
     "Fictional"
 ];*/
-//show a checkmark when the tag is clicked
+//todo: show a checkmark when the tag is clicked
 function Tag({ name, isSelected }) {
     return (
         <li className='text-lg'>{name}</li>
@@ -161,24 +161,28 @@ function ValidateLogin() {
         return window.alert("Please log in or create an account to use this feature")
     };
 };
-/*twitter style submit form*/
-//First, validate that that they are logged in
-//when this is pulled up, remove the feed
+let date = new Date()
+let hours = date.getHours();
+let am_pm;
+function MilitaryToStandard() {
+    return (hours > 12 ? am_pm = "PM" : am_pm = "AM");
+}
 function PostDate() {
-    const filter_date = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-    };
-    return (
-        //this will need to be updated with back end retrieving the time zone
-        new Date().toLocaleDateString('en-US', filter_date)
-    );
+    MilitaryToStandard();
+    const dateString = date.getUTCMonth() + 1 + "/" +
+        ("0" + date.getUTCDate()).slice(-2) + "/" +
+        ("0" + date.getUTCFullYear()).slice(-2) + " at " +
+        "0" + hours + ":" +
+        ("0" + date.getMinutes()).slice(-2) + " " + am_pm;
+    return dateString;
 };
 //use a button to pull it up, then the x exits it
 //want to get rid of exit on "submit", should only exit on X btn
+
+//todo: fix inside text not scaling
+/*twitter style submit form*/
+//First, validate that that they are logged in
+//when this is pulled up, remove the feed
 function Submit() {
     //inside this, allow user to pull from the list of tags when posting
     const [SubVisible, setSubVisible] = useState(false);
