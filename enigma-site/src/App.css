@@ -59,10 +59,11 @@ li:not(#logo) {
 
 }
 
-li:hover:not(#logo) {
+li:hover:not(.nohover) {
   background-color: rgb(38, 38, 41);
-
 }
+
+
 
 /*so it fits with the container*/
 #last:hover {
@@ -71,7 +72,14 @@ li:hover:not(#logo) {
   border-bottom-right-radius: 1.25rem;
 }
 
+#search_bar>input {
+  padding: 0 .2rem 0 .2rem;
+}
 
+#search_bar>input:focus {
+  outline: solid rgb(29, 78, 216);
+
+}
 
 @keyframes flicker {
   0% {
