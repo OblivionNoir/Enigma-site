@@ -190,6 +190,13 @@ function RevertFeed() {
         item.style.display = "block"
     };
 };
+//add this to the final post after submission
+//issue: date only updates on refresh
+function DatePost() {
+    <small className='block'>
+        <cite>Submitted by <b>Post author on {<PostDate />}</b></cite>
+    </small>
+};
 //todo: fix inside text not scaling
 /*twitter style submit form*/
 //First, validate that that they are logged in
