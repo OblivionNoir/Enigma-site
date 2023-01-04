@@ -161,39 +161,55 @@ function ValidateLogin() {
         return window.alert("Please log in or create an account to use this feature")
     };
 };
-let date = new Date()
-let hours = date.getHours();
+const date = new Date()
+const hours = date.getHours();
 let am_pm;
 function MilitaryToStandard() {
     return (hours > 12 ? am_pm = "PM" : am_pm = "AM");
-}
+};
 function PostDate() {
     MilitaryToStandard();
+    //I guess the month counts as an array and starts at 0
+    //"" just makes it a string so slice works
     const dateString = date.getUTCMonth() + 1 + "/" +
-        ("0" + date.getUTCDate()).slice(-2) + "/" +
-        ("0" + date.getUTCFullYear()).slice(-2) + " at " +
-        "0" + hours + ":" +
-        ("0" + date.getMinutes()).slice(-2) + " " + am_pm;
+        ("" + date.getUTCDate()).slice(-2) + "/" +
+        ("" + date.getUTCFullYear()).slice(-2) + " at " +
+        hours + ":" +
+        ("" + date.getMinutes()).slice(-2) + " " + am_pm;
     return dateString;
 };
-//use a button to pull it up, then the x exits it
-//want to get rid of exit on "submit", should only exit on X btn
-
+let hide = document.getElementsByClassName("scroll_f")
+function FeedDissapear() {
+    for (let item of hide) {
+        item.style.display = "none"
+    };
+};
+function RevertFeed() {
+    for (let item of hide) {
+        item.style.display = "block"
+    };
+};
 //todo: fix inside text not scaling
 /*twitter style submit form*/
 //First, validate that that they are logged in
 //when this is pulled up, remove the feed
+//use a button to pull it up, then the x exits it
+//want to get rid of exit on "submit", should only exit on X btn
 function Submit() {
     //inside this, allow user to pull from the list of tags when posting
     const [SubVisible, setSubVisible] = useState(false);
     const handlePostSubmission = (event) => {
         event.preventDefault()
         setSubVisible(!SubVisible)
-
-        //YOU ARE HERE 
-
-        //will need to loop through elements with "scroll_f" class, display 
-        //none them, then revert it when the user goes back or the post is made
+        //toggle showing the feed 
+        //might be a better way with state but I can't figure it out 
+        //without attaching directly to the feed - bad idea
+        if (SubVisible == false) {
+            FeedDissapear()
+        } else {
+            RevertFeed()
+        };
+        //Cannot attach to main feed, too much else going on there. Bad idea.
     };
     return (
         <React.Fragment>
@@ -208,7 +224,7 @@ function Submit() {
                     </button>
                     <h1 className='text-2xl'>Title here</h1>
 
-                    <p className='text-xl h-32'>Text here</p>
+                    <textarea className='text-xl h-32'>Text here</textarea>
 
                     <small className='block'>
                         <cite>Submitted by <b>Post author on {<PostDate />}</b></cite>
@@ -274,7 +290,7 @@ function ScrollFeed() {
     return (
         <div>
             <div id="mini-nav-cont" className='max-w-4xl m-auto flex 
-            justify-end scroll_f'>
+            justify-end'>
                 <nav className=' text-white mt-32 whitespace-nowrap mr-4'>
                     <ul className='flex flex-row space-x-2.5'>
                         <li><small>Sort by...</small></li>
