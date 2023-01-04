@@ -21,6 +21,7 @@ module.exports = {
     },
     margin:{
       'mtemp': '7.2rem',
+      'postbm': '46rem',
     }
   },
   plugins: [],
