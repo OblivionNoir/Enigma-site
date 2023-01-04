@@ -55,6 +55,7 @@ function SignLog() {
 function Navbar() {
     //why is navigation so needlessly complicated...want my href back
     return (
+
         <BrowserRouter>
             <nav className="text-2xl fixed w-full z-10 topnav whitespace-nowrap">
                 <ul className=' text-blue-700  flex flex-row justify-start 
@@ -78,7 +79,10 @@ function Navbar() {
                     {/*<li>
                         <Link to="/Premium">Go Premium</Link>
                     </li>*/}
-                    <li><ValidateLogin /></li>
+                    <li>
+                        <ValidateLogin />
+                    </li>
+
 
                     <SignLog />
 
@@ -174,7 +178,7 @@ function PostDate() {
     );
 };
 //use a button to pull it up, then the x exits it
-//Made it here, don't touch the validation
+//want to get rid of exit on "submit", should only exit on X btn
 function Submit() {
     //inside this, allow user to pull from the list of tags when posting
     const [SubVisible, setSubVisible] = useState(false);
@@ -189,8 +193,8 @@ function Submit() {
             </button>
 
             {SubVisible && (
-                <form>
-                    <button className='exitForm'>
+                <form className=' absolute z-10 mt-mtemp px-10 left-mtemp right-mtemp '>
+                    <button >
                         <small onClick={handlePostSubmission}>&#10006;</small>
                     </button>
                     <h1 className='text-2xl'>Title here</h1>

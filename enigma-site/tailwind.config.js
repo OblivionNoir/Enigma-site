@@ -16,6 +16,12 @@ module.exports = {
       'normaltext': '.95vmax',
       'logosize': '1.9vmax'
     },
+    spacing:{
+      'mtemp': '32.5%',
+    },
+    margin:{
+      'mtemp': '7.2rem',
+    }
   },
   plugins: [],
 }
