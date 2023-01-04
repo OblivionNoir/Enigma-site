@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { AboutTest } from './About'
 import { SignUpTest } from './SignUp';
-import { PremiumTest } from './Premium';
+//import { PremiumTest } from './Premium';
 import { LoginTest } from './Login';
 
 
@@ -185,6 +185,11 @@ function Submit() {
     const handlePostSubmission = (event) => {
         event.preventDefault()
         setSubVisible(!SubVisible)
+
+        //YOU ARE HERE 
+
+        //will need to loop through elements with "scroll_f" class, display 
+        //none them, then revert it when the user goes back or the post is made
     };
     return (
         <React.Fragment>
@@ -193,13 +198,13 @@ function Submit() {
             </button>
 
             {SubVisible && (
-                <form className=' absolute z-10 mt-mtemp px-10 left-mtemp right-mtemp '>
+                <form className='text-black absolute z-10 mt-mtemp px-10 left-mtemp right-mtemp bg-zinc-500'>
                     <button >
                         <small onClick={handlePostSubmission}>&#10006;</small>
                     </button>
                     <h1 className='text-2xl'>Title here</h1>
 
-                    <p className='text-xl'>Text here</p>
+                    <p className='text-xl h-32'>Text here</p>
 
                     <small className='block'>
                         <cite>Submitted by <b>Post author on {<PostDate />}</b></cite>
@@ -263,9 +268,9 @@ function HandleFormData() {
 function ScrollFeed() {
     let article_author = "me"
     return (
-        <React.Fragment>
+        <div>
             <div id="mini-nav-cont" className='max-w-4xl m-auto flex 
-            justify-end'>
+            justify-end scroll_f'>
                 <nav className=' text-white mt-32 whitespace-nowrap mr-4'>
                     <ul className='flex flex-row space-x-2.5'>
                         <li><small>Sort by...</small></li>
@@ -275,7 +280,7 @@ function ScrollFeed() {
                 </nav>
             </div>
 
-            <main className=' flex flex-column bg-zinc-500 max-w-4xl 
+            <main className=' flex flex-column bg-zinc-500 max-w-4xl scroll_f
             justify-center m-auto mt-3 overflow-y-auto rounded-3xl font-mono'>
                 <section className=' w-MainScroll mt-5 rounded-3xl'>
                     <div className='space-y-16 mx-5'>
@@ -283,7 +288,7 @@ function ScrollFeed() {
                     </div>
                 </section>
             </main>
-        </React.Fragment>
+        </div>
     );
 };
 //do the main rendering here
