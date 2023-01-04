@@ -178,6 +178,7 @@ function PostDate() {
         ("" + date.getMinutes()).slice(-2) + " " + am_pm;
     return dateString;
 };
+//might be able to do this more efficiently but idk how
 let hide = document.getElementsByClassName("scroll_f")
 function FeedDissapear() {
     for (let item of hide) {
@@ -201,14 +202,8 @@ function Submit() {
     const handlePostSubmission = (event) => {
         event.preventDefault()
         setSubVisible(!SubVisible)
-        //toggle showing the feed 
-        //might be a better way with state but I can't figure it out 
-        //without attaching directly to the feed - bad idea
-        if (SubVisible == false) {
-            FeedDissapear()
-        } else {
-            RevertFeed()
-        };
+            //toggle showing the feed, linked to the post's visible state
+            (SubVisible == false ? FeedDissapear() : RevertFeed())
         //Cannot attach to main feed, too much else going on there. Bad idea.
     };
     return (
@@ -235,9 +230,6 @@ function Submit() {
         </React.Fragment>
     );
 };
-
-
-
 
 function RenderList() {
     const [isVisible, setVisible] = useState(false);
