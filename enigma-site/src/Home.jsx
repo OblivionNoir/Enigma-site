@@ -113,52 +113,40 @@ function Navbar() {
         </BrowserRouter>
     );
 };
-/*var tags = ["Dark Web",
-    "Internet Culture",
-    "Cybersecurity",
-    "Media/Entertainment",
-    "Scary", "Conspiracies",
-    "Fictional"
-];*/
-//todo: show a checkmark when the tag is clicked
-function Tag({ name, isSelected }) {
-    return (
-        <li className='text-lg'>{name}</li>
-    );
+//functionality to use the value of the checkbox, stored in state
+function CheckBox() {
+    const [isChecked, setIsChecked] = useState(false);
+    const handleCheck = () => {
+        setIsChecked(!isChecked);
+    };
+    return <input type="checkbox" defaultChecked={handleCheck}></input>
 };
 //button flips true/false depending on the current state value
 //&& operator renders the list if isVisible is true
 function TagsList() {
     return (
-        <ul>
-            <Tag
-                isSelected={true}
-                name='Dark Web'
-            />
-            <Tag
-                isSelected={true}
-                name='Internet Culture'
-            />
-            <Tag
-                isSelected={true}
-                name='Cybersecurity'
-            />
-            <Tag
-                isSelected={true}
-                name='Media/Entertainment'
-            />
-            <Tag
-                isSelected={true}
-                name='Scary'
-            />
-            <Tag
-                isSelected={true}
-                name='Conspiracies'
-            />
-            <Tag
-                isSelected={true}
-                name='Fictional'
-            />
+        <ul className='text-lg'>
+            <li>Dark Web
+                <CheckBox />
+            </li>
+            <li>Internet Culture
+                <CheckBox />
+            </li>
+            <li>Cybersecurity
+                <CheckBox />
+            </li>
+            <li>Media/Entertainment
+                <CheckBox />
+            </li>
+            <li>Scary
+                <CheckBox />
+            </li>
+            <li>Conspiracies
+                <CheckBox />
+            </li>
+            <li>Fictional
+                <CheckBox />
+            </li>
         </ul>
     );
 };
@@ -181,7 +169,7 @@ let am_pm;
 function MilitaryToStandard() {
     return (hours > 12 ? am_pm = "PM" : am_pm = "AM");
 };
-function PostDate() {
+function CreateDate() {
     MilitaryToStandard();
     //I guess the month counts as an array and starts at 0
     //"" just makes it a string so slice works
@@ -195,12 +183,12 @@ function PostDate() {
 //might be able to do this more efficiently but idk how
 let hide = document.getElementsByClassName("scroll_f")
 function FeedDissapear() {
-    for (let item of hide) {
+    for (const item of hide) {
         item.style.display = "none"
     };
 };
 function RevertFeed() {
-    for (let item of hide) {
+    for (const item of hide) {
         item.style.display = "block"
     };
 };
@@ -208,10 +196,11 @@ function RevertFeed() {
 //issue: date only updates on refresh
 function DatePost() {
     <small className='block'>
-        <cite>Submitted by <b>Post author on {<PostDate />}</b></cite>
+        <cite>Submitted by <b>Post author on {<CreateDate />}</b></cite>
     </small>
 };
-function TextareaExpander({ rows, cols, placeholder }) {
+//allows text boxes to expand downwards
+function TextAreaExpander({ rows, cols, placeholder }) {
     const textareaRef = useRef(null);
 
     useEffect(() => {
@@ -236,8 +225,10 @@ function TextareaExpander({ rows, cols, placeholder }) {
         >
         </textarea>
     );
-}
+};
 //todo: fix inside text not scaling
+//boxes look fucky too, maybe use CSS instead of rows/cols
+
 /*twitter style submit form*/
 //First, validate that that they are logged in
 //when this is pulled up, remove the feed
@@ -250,7 +241,7 @@ function Submit() {
         event.preventDefault()
         setSubVisible(!SubVisible)
         //toggle showing the feed, linked to the post's visible state
-        SubVisible == false ? FeedDissapear() : RevertFeed()
+        SubVisible === false ? FeedDissapear() : RevertFeed()
         //Cannot attach to main feed, too much else going on there. Bad idea.
     };
     return (
@@ -267,13 +258,13 @@ function Submit() {
                     <button className='ml-postbm'>Post</button>
 
                     <h1 className='text-xl'>
-                        <TextareaExpander
+                        <TextAreaExpander
                             rows="1" cols="60"
                             placeholder="What is this post about?" />
                     </h1>
 
                     <p className='text-lg mt-4'>
-                        <TextareaExpander
+                        <TextAreaExpander
                             rows="6" cols="70"
                             placeholder="Text" />
                     </p>
@@ -310,31 +301,10 @@ function RenderList() {
 //in column format
 //default sort is by most popular that day
 
-function HandleFormSubmission(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    fetch('/src/back/form/submit-form', {
-        method: 'POST',
-        body: formData
-    })
-        .then((response) => response.text())
-        .then((data) => {
-            console.log(data);
-        });
-};
-
-function HandleFormData() {
-    fetch('./src/back/form/get-data')
-        .then((response) => response.json())
-        .then((data) => {
-            //display the data
-        });
-};
-
 function ScrollFeed() {
     let article_author = "me"
     return (
-        <div>
+        <React.Fragment>
             <div id="mini-nav-cont" className='max-w-4xl m-auto flex 
             justify-end'>
                 <nav className=' text-white mt-32 whitespace-nowrap mr-4'>
@@ -350,11 +320,11 @@ function ScrollFeed() {
             justify-center m-auto mt-3 overflow-y-auto rounded-3xl font-mono'>
                 <section className=' w-MainScroll mt-5 rounded-3xl'>
                     <div className='space-y-16 mx-5'>
-
+                        {/*post goes in here*/}
                     </div>
                 </section>
             </main>
-        </div>
+        </React.Fragment>
     );
 };
 //do the main rendering here
