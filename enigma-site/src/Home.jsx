@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { AboutTest } from './About'
 import { SignUpTest } from './SignUp';
-//import { PremiumTest } from './Premium';
+import { PremiumTest } from './Premium';
 import { LoginTest } from './Login';
 
 
@@ -62,12 +62,12 @@ function SearchBar() {
             </input>
         </li>
     );
-}
+};
+//study other site navbars to see how this should be done responsively 
 function Navbar() {
     //why is navigation so needlessly complicated...want my href back
     //Home will route the same as clicking the logo
     return (
-
         <BrowserRouter>
             <nav className="text-2xl fixed w-full z-10 topnav whitespace-nowrap">
                 <ul className=' text-blue-700  flex flex-row justify-start 
@@ -98,15 +98,17 @@ function Navbar() {
                         <Link to="/Home">Home</Link>
                     </li>
                     <SearchBar />
+                    <li>Go Premium</li>
 
                     <SignLog />
+
                 </ul>
             </nav>
 
             <Routes>
                 <Route path="/Home"></Route>
                 <Route path="/About" element={<AboutTest />}></Route>
-                {/*<Route path="/Premium" element={<PremiumTest />}></Route>*/}
+                <Route path="/Premium" element={<PremiumTest />}></Route>*/
                 <Route path="/Login" element={<LoginTest />}></Route>
                 <Route path="/SignUp" element={<SignUpTest />}></Route>
             </Routes>
@@ -116,9 +118,8 @@ function Navbar() {
 //functionality to use the value of the checkbox, stored in state
 function CheckBox() {
     const [isChecked, setIsChecked] = useState(false);
-    const handleCheck = () => {
-        setIsChecked(!isChecked);
-    };
+    const handleCheck = () => setIsChecked(!isChecked);
+
     return <input type="checkbox" defaultChecked={handleCheck}></input>
 };
 //button flips true/false depending on the current state value
@@ -163,22 +164,19 @@ function ValidateLogin() {
         return window.alert("Please log in or create an account to use this feature")
     };
 };
-const date = new Date()
-const hours = date.getHours();
-let am_pm;
-function MilitaryToStandard() {
-    return (hours > 12 ? am_pm = "PM" : am_pm = "AM");
-};
+
 function CreateDate() {
-    MilitaryToStandard();
-    //I guess the month counts as an array and starts at 0
-    //"" just makes it a string so slice works
-    const dateString = date.getUTCMonth() + 1 + "/" +
-        ("" + date.getUTCDate()).slice(-2) + "/" +
-        ("" + date.getUTCFullYear()).slice(-2) + " at " +
-        hours + ":" +
-        ("" + date.getMinutes()).slice(-2) + " " + am_pm;
-    return dateString;
+    const date = new Date();
+    return (
+        date.toLocaleString('en-US', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+        })
+    );
 };
 //might be able to do this more efficiently but idk how
 let hide = document.getElementsByClassName("scroll_f")
@@ -195,14 +193,20 @@ function RevertFeed() {
 //add this to the final post after submission
 //issue: date only updates on refresh
 function DatePost() {
-    <small className='block'>
-        <cite>Submitted by <b>Post author on {<CreateDate />}</b></cite>
-    </small>
+    return (
+        <small className='block'>
+            <cite>Submitted by <b>Post author on {<CreateDate />}</b></cite>
+        </small>
+
+    );
+
 };
 //allows text boxes to expand downwards
 function TextAreaExpander({ rows, cols, placeholder }) {
     const textareaRef = useRef(null);
-
+    /*useeffect tells react to execute this after rendering 
+    when side effects are allowed. Should only be last resort, if you 
+    cannot use a handler*/
     useEffect(() => {
         const textarea = textareaRef.current;
         textarea.style.height = "auto";
@@ -251,25 +255,30 @@ function Submit() {
             </button>
 
             {SubVisible && (
-                <form className='text-black absolute z-10 mt-mtemp px-10 left-mtemp right-mtemp bg-zinc-500 '>
-                    <button >
-                        <small onClick={handlePostSubmission}>&#10006;</small>
-                    </button>
-                    <button className='ml-postbm'>Post</button>
+                <>
 
-                    <h1 className='text-xl'>
-                        <TextAreaExpander
-                            rows="1" cols="60"
-                            placeholder="What is this post about?" />
-                    </h1>
+                    <form className='text-black absolute z-10 mt-mtemp px-10 left-mtemp right-mtemp bg-zinc-500 '>
+                        <button >
+                            <small onClick={handlePostSubmission}>&#10006;</small>
+                        </button>
+                        <button className='ml-postbm'>Post</button>
 
-                    <p className='text-lg mt-4'>
-                        <TextAreaExpander
-                            rows="6" cols="70"
-                            placeholder="Text" />
-                    </p>
-                    <RenderList />
-                </form>
+                        <h1 className='text-xl'>
+                            <TextAreaExpander
+                                rows="1" cols="60"
+                                placeholder="What is this post about?" />
+                        </h1>
+
+                        <p className='text-lg mt-4'>
+                            <TextAreaExpander
+                                rows="6" cols="70"
+                                placeholder="Text" />
+                        </p>
+                        <DatePost />
+                        <RenderList />
+                    </form>
+                </>
+
             )}
         </React.Fragment>
     );
