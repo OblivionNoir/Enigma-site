@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, Fragment } from "react";
 //import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { AboutTest } from './About'
@@ -51,6 +51,7 @@ function SignLog() {
         </ul>
     );
 };
+
 function SearchBar() {
     return (
         <li id="search_bar" className='nohover'>
@@ -64,6 +65,7 @@ function SearchBar() {
     );
 };
 //study other site navbars to see how this should be done responsively 
+
 function Navbar() {
     //why is navigation so needlessly complicated...want my href back
     //Home will route the same as clicking the logo
@@ -116,14 +118,18 @@ function Navbar() {
     );
 };
 //functionality to use the value of the checkbox, stored in state
+/*todo: make clicking the button change the check too,
+ not just the checkbox itself*/
 function CheckBox() {
     const [isChecked, setIsChecked] = useState(false);
-    const handleCheck = () => setIsChecked(!isChecked);
 
-    return <input type="checkbox" defaultChecked={handleCheck}></input>
+    return (
+        <input
+            type="checkbox" defaultChecked={() => { setIsChecked(!isChecked) }}>
+        </input>
+    );
 };
-//button flips true/false depending on the current state value
-//&& operator renders the list if isVisible is true
+
 function TagsList() {
     return (
         <ul className='text-lg'>
@@ -164,7 +170,8 @@ function ValidateLogin() {
         return window.alert("Please log in or create an account to use this feature")
     };
 };
-
+//this needs something to keep it constantly updated
+//not just when the page refreshes
 function CreateDate() {
     const date = new Date();
     return (
@@ -191,16 +198,18 @@ function RevertFeed() {
     };
 };
 //add this to the final post after submission
-//issue: date only updates on refresh
 function DatePost() {
     return (
         <small className='block'>
-            <cite>Submitted by <b>Post author on {<CreateDate />}</b></cite>
+            <cite>Submitted by <b>Post author on {
+                <CreateDate />
+
+            }</b></cite>
         </small>
-
     );
-
 };
+//keep the time updated
+setInterval(CreateDate, 1000)
 //allows text boxes to expand downwards
 function TextAreaExpander({ rows, cols, placeholder }) {
     const textareaRef = useRef(null);
@@ -237,7 +246,8 @@ function TextAreaExpander({ rows, cols, placeholder }) {
 //First, validate that that they are logged in
 //when this is pulled up, remove the feed
 //use a button to pull it up, then the x exits it
-//want to get rid of exit on "submit", should only exit on X btn
+
+//for future instances, probably easier to make a new page than do all the css stuff here
 function Submit() {
     //inside this, allow user to pull from the list of tags when posting
     const [SubVisible, setSubVisible] = useState(false);
@@ -249,13 +259,13 @@ function Submit() {
         //Cannot attach to main feed, too much else going on there. Bad idea.
     };
     return (
-        <React.Fragment>
+        <Fragment>
             <button onClick={handlePostSubmission}>
                 Submit
             </button>
 
             {SubVisible && (
-                <>
+                <Fragment>
 
                     <form className='text-black absolute z-10 mt-mtemp px-10 left-mtemp right-mtemp bg-zinc-500 '>
                         <button >
@@ -277,10 +287,10 @@ function Submit() {
                         <DatePost />
                         <RenderList />
                     </form>
-                </>
+                </Fragment>
 
             )}
-        </React.Fragment>
+        </Fragment>
     );
 };
 
